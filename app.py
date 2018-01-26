@@ -114,6 +114,7 @@ def historic():
 @app.route('/map')
 def map():
     
+    bokeh.sampledata.download()
     from bokeh.sampledata.us_counties import data as counties
     # Import predictive model
 
