@@ -3,10 +3,7 @@ pandas
 bokeh
 sklearn
 tqdm
-datetime
 pytz
-re
-dill
 jinja2
 pip
 simplejson
