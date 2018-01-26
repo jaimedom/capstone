@@ -1,0 +1,35 @@
+<html>
+<head>
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.css"
+    rel="stylesheet" type="text/css">
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.css"
+    rel="stylesheet" type="text/css">
+
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
+
+</head>
+<body>
+<H1>The data incubator 12 day</H1>
+
+<form action="/">
+Company code: <input type="text" name="code" value="{{ current_code }}"><br>
+<select name="price_option">
+	{% for price in price_options %}
+		{% if price == current_selected_price %}
+			<option selected value="{{ price }}">{{ price }}</option> 
+		{% else %} 
+			<option value="{{ price }}">{{ price }}</option> 
+		{% endif %}
+	{% endfor %}
+</select>
+<input type="submit">
+</form>
+
+{{ script|safe }}
+{{ div|safe }}
+
+</body>
+</html>
