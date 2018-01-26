@@ -1,7 +1,7 @@
 flask
 pandas
 bokeh
-sklearn
+scikit-learn
 tqdm
 pytz
 jinja2
