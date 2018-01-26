@@ -158,14 +158,14 @@ def map():
         
         temp['county'] = [i]
         temp['startDate'] = [str(month)+'/'+str(day)+'/'+str(year)]
-        temp['meanTemp']= [int(re.sub(r'°F','',table['b']['Mean Temperature']).strip())]
-        temp['maxTemp']= [int(re.sub(r'°F','',table['b']['Max Temperature']).strip())]
-        temp['minTemp']= [int(re.sub(r'°F','',table['b']['Min Temperature']).strip())]
-        temp['dewPoint']= [int(re.sub(r'°F','',table['b']['Dew Point']).strip())]
-        temp['avgHumidity']= [int(table['b']['Average Humidity'])]
-        temp['maxHumidity']= [int(table['b']['Maximum Humidity'])]
-        temp['minHumidity']= [int(table['b']['Minimum Humidity'])]
-        temp['maxWind']= [int(re.sub(r'mph','',table['b']['Max Wind Speed']).strip())]
+        temp['meanTemp']= [int(re.findall(r'[0-9]+',table['b']['Mean Temperature'])[0])]
+        temp['maxTemp']= [int(re.findall(r'[0-9]+',table['b']['Max Temperature'])[0])]
+        temp['minTemp']= [int(re.findall(r'[0-9]+',table['b']['Min Temperature'])[0])]
+        temp['dewPoint']= [int(re.findall(r'[0-9]+',table['b']['Dew Point'])[0])]
+        temp['avgHumidity']= [int(re.findall(r'[0-9]+',table['b']['Average Humidity'])[0])]
+        temp['maxHumidity']= [int(re.findall(r'[0-9]+',table['b']['Maximum Humidity'])[0])]
+        temp['minHumidity']= [int(re.findall(r'[0-9]+',table['b']['Minimum Humidity'])[0])]
+        temp['maxWind']= [int(re.findall(r'[0-9]+',table['b']['Max Wind Speed'])[0])]
         
         if df.empty:
             df = pd.DataFrame.from_dict(temp)
