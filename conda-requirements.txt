@@ -1,3 +1,4 @@
+flask
 pandas
 bokeh
 sklearn
@@ -6,7 +7,6 @@ datetime
 pytz
 re
 dill
-flask
 jinja2
 pip
 simplejson
