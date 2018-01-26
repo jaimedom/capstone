@@ -5,7 +5,6 @@ from bokeh.embed import components
 from bokeh.layouts import column, widgetbox
 from bokeh.models import ColumnDataSource, HoverTool, CategoricalColorMapper
 from bokeh.models.widgets import Select
-from bokeh.sampledata.us_counties import data as counties
 from sklearn.externals import joblib
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction import DictVectorizer
@@ -16,6 +15,7 @@ from tqdm import tqdm
 import datetime
 import pytz
 import re
+import pickle
 
 app = Flask(__name__)
 
@@ -113,18 +113,15 @@ def historic():
 
 @app.route('/map')
 def map():
-    
-    bokeh.sampledata.download()
-    from bokeh.sampledata.us_counties import data as counties
+
     # Import predictive model
 
     model = joblib.load('model.pkl')
     
     # Import bokeh areas
     
-    counties = {
-        code: county for code, county in counties.items() if county["state"] == "ca"
-    }
+    with open('geocounty.pkl', 'rb') as handle:
+        counties = pickle.load(handle)
     
     # Import airports data
     
