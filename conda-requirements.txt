@@ -5,4 +5,8 @@ tqdm
 datetime
 pytz
 re
+dill
 flask
+jinja2
+pip
+simplejson
