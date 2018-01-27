@@ -20,6 +20,109 @@ app = Flask(__name__)
 
 price_options = ['Close', 'Adjusted close', 'Open', 'Adjusted Open']
 
+#### Start of classes
+
+class ColumnSelectTransformer(base.BaseEstimator, base.TransformerMixin):
+    
+    def __init__(self, colnames):
+        
+        self.cols = colnames
+        
+    def fit(self, X, y=None):
+        
+        return self
+    
+    def transform(self, X):
+        
+        return np.array(X[self.cols].values.tolist())
+  
+class DayProcessor(base.BaseEstimator, base.TransformerMixin):
+    
+    def fit(self, X, y=None):
+        
+        return self
+    
+    def transform(self, X):
+        
+        dates = pd.DatetimeIndex([i[0] for i in X])
+        
+        holidays = USFederalHolidayCalendar().holidays(start=datetime(1969,12,31), 
+                                                       end=datetime(2100,12,31))
+        
+        a = np.array([x in holidays for x in list(dates)])
+        b = np.array([x.dayofweek in [5,6] for x in list(dates)])
+        
+        return np.stack((a,b), axis=1)
+    
+class MonthProcessor(base.BaseEstimator, base.TransformerMixin):
+    
+    def fit(self, X, y=None):
+        
+        return self
+    
+    def transform(self, X):
+        
+        dates = pd.DatetimeIndex([i[0] for i in X])
+        
+        return [{x.month: 1} for x in list(dates)]
+    
+class CountyDicGenerator(base.BaseEstimator, base.TransformerMixin):
+    
+    def fit(self, X, y=None):
+        
+        return self
+    
+    def transform(self, X):
+        
+        return [{''.join(x): 1} for x in X.tolist()]
+    
+class ThresholdEstimator(base.BaseEstimator, base.RegressorMixin):
+    
+    def __init__(self, model, r):
+        
+        self.model = model
+        self.r = r
+    
+    def fit(self, X, y):
+        
+        self.model.fit(X,y)
+        
+    def predict(self, X):
+        
+        return [True if k[1] > self.r else False for k in self.model.predict_proba(X)]
+    
+day_features = Pipeline([
+                         ('date',ColumnSelectTransformer(['startDate'])),
+                         ('day',DayProcessor())
+                        ])
+
+month_vectorizer = Pipeline([
+                             ('data',ColumnSelectTransformer(['startDate'])),
+                             ('month',MonthProcessor()),
+                             ('vectorizer', DictVectorizer(sparse = False))
+                            ])
+
+    
+county_vectorizer = Pipeline([
+                              ('county',ColumnSelectTransformer(['county'])),
+                              ('dict', CountyDicGenerator()),
+                              ('vectorizer', DictVectorizer(sparse = False))
+                             ])
+
+weather_variables = ['avgHumidity', 'dewPoint', 'maxHumidity', 'maxTemp',
+                     'maxWind', 'meanTemp', 'minHumidity', 'minTemp']
+
+label = np.array(df['fire'])
+
+features = FeatureUnion([
+        ('date',day_features),
+        ('month',month_vectorizer),
+        ('county',county_vectorizer),
+        ('weather',ColumnSelectTransformer(weather_variables))
+    ])
+
+### Finish of classes
+
 @app.route('/')
 def index():
     
