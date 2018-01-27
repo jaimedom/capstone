@@ -116,12 +116,12 @@ county_vectorizer = Pipeline([
 weather_variables = ['avgHumidity', 'dewPoint', 'maxHumidity', 'maxTemp',
                          'maxWind', 'meanTemp', 'minHumidity', 'minTemp']
 
-    features = FeatureUnion([
-                             ('date',day_features),
-                             ('month',month_vectorizer),
-                             ('county',county_vectorizer),
-                             ('weather',ColumnSelectTransformer(weather_variables))
-                            ])
+features = FeatureUnion([
+                         ('date',day_features),
+                         ('month',month_vectorizer),
+                         ('county',county_vectorizer),
+                         ('weather',ColumnSelectTransformer(weather_variables))
+                        ])
 
 @app.route('/')
 def index():
