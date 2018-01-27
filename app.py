@@ -19,6 +19,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.pipeline import FeatureUnion
 from sklearn import base
+import numpy as np
 
 app = Flask(__name__)
 
@@ -115,8 +116,6 @@ county_vectorizer = Pipeline([
 
 weather_variables = ['avgHumidity', 'dewPoint', 'maxHumidity', 'maxTemp',
                      'maxWind', 'meanTemp', 'minHumidity', 'minTemp']
-
-label = np.array(df['fire'])
 
 features = FeatureUnion([
         ('date',day_features),

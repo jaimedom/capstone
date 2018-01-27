@@ -7,3 +7,4 @@ pytz
 jinja2
 pip
 simplejson
+numpy
