@@ -294,4 +294,4 @@ metrics.confusion_matrix(label, results)
 
 # Save model
 
-joblib.dump(estimator, 'model.pkl', compress = 1)
+joblib.dump(estimator, 'model.pkl', compress = 1, protocol = 2)
