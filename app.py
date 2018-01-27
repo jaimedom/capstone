@@ -15,6 +15,10 @@ from tqdm import tqdm
 import datetime
 import pytz
 import re
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction import DictVectorizer
+from sklearn.pipeline import FeatureUnion
+from sklearn import base
 
 app = Flask(__name__)
 
