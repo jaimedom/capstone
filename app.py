@@ -15,7 +15,6 @@ from tqdm import tqdm
 import datetime
 import pytz
 import re
-import pickle
 
 app = Flask(__name__)
 
@@ -120,8 +119,7 @@ def map():
     
     # Import bokeh areas
     
-    with open('geocounty.pkl', 'rb') as handle:
-        counties = pickle.load(handle)
+    counties = pd.read_pickle('geocounty.pkl')
     
     # Import airports data
     
