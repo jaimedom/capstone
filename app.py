@@ -24,6 +24,7 @@ try:
     from bokeh.sampledata.us_counties import data as counties
 
 except:
+    import bokeh
     bokeh.sampledata.download()
     from bokeh.sampledata.us_counties import data as counties
 
