@@ -147,7 +147,7 @@ model_final = Pipeline([
                  ])
     
 model = ThresholdEstimator(model_final,0.1)
-estimator.fit(df2,label2)
+model.fit(df2,label2)
 
 @app.route('/')
 def index():
