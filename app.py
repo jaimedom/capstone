@@ -20,7 +20,7 @@ from sklearn.pipeline import FeatureUnion
 from sklearn import base
 import numpy as np
 from pandas.tseries.holiday import USFederalHolidayCalendar
-from ..Transformers import ColumnSelectTransformer, DayProcessor, MonthProcessor, CountyDicGenerator, ThresholdEstimator
+from .Transformers import ColumnSelectTransformer, DayProcessor, MonthProcessor, CountyDicGenerator, ThresholdEstimator
 
 app = Flask(__name__)
 
