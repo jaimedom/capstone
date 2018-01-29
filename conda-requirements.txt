@@ -7,3 +7,4 @@ pip
 numpy
 lxml
 html5lib
+BeautifulSoup4
