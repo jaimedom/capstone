@@ -21,12 +21,12 @@ import numpy as np
 from pandas.tseries.holiday import USFederalHolidayCalendar
 
 try:
-    from bokeh.sampledata.us_counties import data as counties
+    import bokeh.sampledata.us_counties
 
 except:
     import bokeh
     bokeh.sampledata.download()
-    from bokeh.sampledata.us_counties import data as counties
+    import bokeh.sampledata.us_counties
 
 app = Flask(__name__)
 
@@ -253,7 +253,7 @@ def map():
     # Import bokeh areas
     
     counties = {
-                code: county for code, county in counties.items() if county["state"] == "ca"
+                code: county for code, county in bokeh.sampledata.us_counties.items() if county["state"] == "ca"
                }
     
     # Generate current values
