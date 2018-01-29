@@ -31,9 +31,7 @@ df_false = pd.read_csv('false_data.csv', parse_dates = ['startDate'])
 
 df2 = df_false.append(df_true[df_false.columns], ignore_index=True)
 
-holidays = USFederalHolidayCalendar().holidays(start=datetime(1969,12,31), 
-                                               end=datetime(2100,12,31)
-                                              )
+holidays = USFederalHolidayCalendar().holidays()
 
 # Clean data before building machine learning
 # Asume that there is no wind if not reported
@@ -69,8 +67,7 @@ class DayProcessor(base.BaseEstimator, base.TransformerMixin):
         
         dates = pd.DatetimeIndex([i[0] for i in X])
         
-        holidays = USFederalHolidayCalendar().holidays(start=datetime(1969,12,31), 
-                                                       end=datetime(2100,12,31))
+        holidays = USFederalHolidayCalendar().holidays()
         
         a = np.array([x in holidays for x in list(dates)])
         b = np.array([x.dayofweek in [5,6] for x in list(dates)])
