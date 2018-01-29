@@ -5,3 +5,4 @@ pytz
 jinja2
 pip
 numpy
+lxml
