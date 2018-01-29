@@ -92,6 +92,10 @@ class ThresholdEstimator(base.BaseEstimator, base.RegressorMixin):
     def predict(self, X):
 
         return [True if k[1]>self.r else False for k in self.model.predict_proba(X)]
+    
+# Import predictive model
+
+model = joblib.load('model.pkl')
 
 @app.route('/')
 def index():
@@ -185,10 +189,6 @@ def historic():
 
 @app.route('/map')
 def map():
-    
-    # Import predictive model
-
-    model = joblib.load('model.pkl')
     
     # Import bokeh areas
     
