@@ -19,7 +19,13 @@ from sklearn.pipeline import FeatureUnion
 from sklearn import base
 import numpy as np
 from pandas.tseries.holiday import USFederalHolidayCalendar
-from bokeh.sampledata.us_counties import data as counties
+
+try:
+    from bokeh.sampledata.us_counties import data as counties
+
+except:
+    bokeh.sampledata.download()
+    from bokeh.sampledata.us_counties import data as counties
 
 app = Flask(__name__)
 
