@@ -24,6 +24,27 @@ app = Flask(__name__)
 
 # Create sklearn classes
 
+# Import the fire related data
+
+df_true = pd.read_csv('fires_final.csv', parse_dates = ['startDate'])
+df_false = pd.read_csv('false_data.csv', parse_dates = ['startDate'])
+
+df2 = df_false.append(df_true[df_false.columns], ignore_index=True)
+
+holidays = USFederalHolidayCalendar().holidays(start=datetime(1969,12,31), 
+                                               end=datetime(2100,12,31)
+                                              )
+
+# Clean data before building machine learning
+# Asume that there is no wind if not reported
+
+df2.fillna(value = {'maxWind': 0}, inplace = True)
+
+# Eliminate the rows with missing values
+
+df2.dropna(inplace=True)
+df2.describe()
+
 class ColumnSelectTransformer(base.BaseEstimator, base.TransformerMixin):
     
     def __init__(self, colnames):
@@ -114,7 +135,7 @@ county_vectorizer = Pipeline([
 weather_variables = ['avgHumidity', 'dewPoint', 'maxHumidity', 'maxTemp',
                      'maxWind', 'meanTemp', 'minHumidity', 'minTemp']
 
-label = np.array(df['fire'])
+label2 = np.array(df2['fire'])
 
 features = FeatureUnion([
         ('date',day_features),
@@ -129,6 +150,7 @@ model_final = Pipeline([
                  ])
     
 model = ThresholdEstimator(model_final,0.1)
+estimator.fit(df2,label2)
 
 @app.route('/')
 def index():
