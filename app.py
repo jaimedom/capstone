@@ -10,7 +10,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.pipeline import FeatureUnion
 from sklearn.tree import DecisionTreeClassifier
-from tqdm import tqdm
 import datetime
 import pytz
 import re
@@ -217,7 +216,7 @@ def map():
     df = pd.DataFrame()
     url_base = 'https://www.wunderground.com/history/airport/'
     
-    for i in tqdm(airports.keys()):
+    for i in airports.keys():
         
         temp = {}
         url = url_base+airports[i][0]+'/'+str(year_temp)+'/'+str(month_temp)+'/'+str(day_temp)+'/DailyHistory.html'
