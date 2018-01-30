@@ -19,18 +19,10 @@ from sklearn.pipeline import FeatureUnion
 from sklearn import base
 import numpy as np
 from pandas.tseries.holiday import USFederalHolidayCalendar
-
-try:
-    import bokeh.sampledata.us_counties
-
-except:
-    import bokeh
-    bokeh.sampledata.download()
-    import bokeh.sampledata.us_counties
+from bokeh.sampledata.us_counties import data as counties
+import dill
 
 app = Flask(__name__)
-
-# Create sklearn classes
 
 # Import the fire related data
 
@@ -252,9 +244,8 @@ def map():
     
     # Import bokeh areas
     
-    counties = {
-                code: county for code, county in bokeh.sampledata.us_counties.items() if county["state"] == "ca"
-               }
+    with open('counties', 'rb') as in_strm:
+        counties = dill.load(in_strm)
     
     # Generate current values
     
