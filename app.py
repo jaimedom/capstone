@@ -244,14 +244,14 @@ def map():
     
     # Import bokeh areas
     
-    counties = {
-                 code: county for code, county in counties.items() if county["state"] == "tx"
-                }
+    with open('counties', 'rb') as in_strm:
+        counties = dill.load(in_strm)
     
     # Generate current values
     
     df = pd.read_csv('map.csv')
     df.startDate = pd.to_datetime(df.startDate)
+    print len(df)
         
     # Inputs for the plot
     
@@ -262,6 +262,7 @@ def map():
     
     county_xs = [county["lons"] for county in counties.values()]
     county_ys = [county["lats"] for county in counties.values()]
+    print len(county_xs)
     
     color_mapper = CategoricalColorMapper(palette=["red", "green"], factors=[True, False])
     
