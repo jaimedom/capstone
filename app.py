@@ -250,7 +250,6 @@ def map():
     
     df = pd.read_csv('map.csv')
     df.startDate = pd.to_datetime(df.startDate)
-    print len(df)
         
     # Inputs for the plot
     
@@ -259,9 +258,8 @@ def map():
     
     # Generate plot
     
-    county_xs = [county["lons"] for county in counties.values()]
-    county_ys = [county["lats"] for county in counties.values()]
-    print len(county_xs)
+    county_xs = [c["lons"] for c in counties.values()]
+    county_ys = [c["lats"] for c in counties.values()]
     
     color_mapper = CategoricalColorMapper(palette=["red", "green"], factors=[True, False])
     
