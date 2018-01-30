@@ -19,6 +19,7 @@ from sklearn.pipeline import FeatureUnion
 from sklearn import base
 import numpy as np
 from pandas.tseries.holiday import USFederalHolidayCalendar
+from bokeh.sampledata.us_counties import data as counties
 import dill
 
 app = Flask(__name__)
@@ -243,8 +244,9 @@ def map():
     
     # Import bokeh areas
     
-    with open('counties', 'rb') as in_strm:
-        counties = dill.load(in_strm)
+    counties = {
+                 code: county for code, county in counties.items() if county["state"] == "tx"
+                }
     
     # Generate current values
     
@@ -295,5 +297,8 @@ def map():
 
     
 if __name__ == '__main__':
-
+    
+    import bokeh.sampledata
+    bokeh.sampledata.download()
+    
 	app.run(port=5000, debug=True)
