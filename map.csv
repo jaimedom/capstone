@@ -15,7 +15,7 @@ avgHumidity,county,dewPoint,maxHumidity,maxTemp,maxWind,meanTemp,minHumidity,min
 30,Inyo,13,53,73,12,50,7,27,2/1/2018
 31,Kern,23,49,71,10,55,16,39,2/1/2018
 80,Kings,42,100,66,10,52,48,37,2/1/2018
-62,Lake County,37,92,68,7,51,32,34,2/1/2018
+62,Lake,37,92,68,7,51,32,34,2/1/2018
 37,Lassen,14,75,60,14,44,8,28,2/1/2018
 50,Los Angeles,40,80,78,15,67,20,55,2/1/2018
 71,Madera,45,96,67,4,55,45,43,2/1/2018
@@ -34,7 +34,7 @@ avgHumidity,county,dewPoint,maxHumidity,maxTemp,maxWind,meanTemp,minHumidity,min
 48,Riverside,30,80,80,8,58,12,35,2/1/2018
 89,Sacramento,42,100,64,9,49,54,34,2/1/2018
 72,San Benito,43,93,73,16,55,36,37,2/1/2018
-36,San Bernardino ,28,56,82,8,64,11,45,2/1/2018
+36,San Bernardino,28,56,82,8,64,11,45,2/1/2018
 35,San Diego,39,51,74,10,64,19,54,2/1/2018
 71,San Francisco,48,93,65,15,60,48,46,2/1/2018
 71,San Joaquin,43,100,69,14,53,42,37,2/1/2018

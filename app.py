@@ -260,6 +260,10 @@ def map():
     
     county_xs = [c["lons"] for c in counties.values()]
     county_ys = [c["lats"] for c in counties.values()]
+    county_cs = [c["name"] for c in counties.values()]
+    
+    indexes = [county.index(c) for c in county_cs]
+    risk = [predicted[i] for i in indexes]
     
     color_mapper = CategoricalColorMapper(palette=["red", "green"], factors=[True, False])
     
@@ -267,7 +271,7 @@ def map():
         x=county_xs,
         y=county_ys,
         name=county,
-        risk=predicted,
+        risk=risk,
     ))
     
     TOOLS = "pan,wheel_zoom,reset,hover,save"
