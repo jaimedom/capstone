@@ -1,7 +1,11 @@
+flask
 pandas
 bokeh
-sklearn
-tqdm
-datetime
 pytz
-re
+jinja2
+pip
+numpy
+lxml
+html5lib
+BeautifulSoup4
+dill

@@ -17,7 +17,6 @@ class ColumnSelectTransformer(base.BaseEstimator, base.TransformerMixin):
         
         return np.array(X[self.cols].values.tolist())
 
-  
 class DayProcessor(base.BaseEstimator, base.TransformerMixin):
     
     def fit(self, X, y=None):
