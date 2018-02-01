@@ -19,18 +19,10 @@ from sklearn.pipeline import FeatureUnion
 from sklearn import base
 import numpy as np
 from pandas.tseries.holiday import USFederalHolidayCalendar
-<<<<<<< HEAD
-
-app = Flask(__name__)
-
-# Create sklearn classes
-
-=======
 import dill
 
 app = Flask(__name__)
 
->>>>>>> 52b35f81f922ba63db6901b0243847c200419e99
 # Import the fire related data
 
 df_true = pd.read_csv('fires_final.csv', parse_dates = ['startDate'])
@@ -175,14 +167,14 @@ def historic():
     
     # Define terms dictionary
     
-    term ={
+    term ={'County':'county',
            'Cost':'cost',
            'Acres':'burnt_acres',
            'Injuries':'injuries',
            'Destroyed structures':'destroyedStructures',
-           'Thretened structures':'threatenedStructures',
+           'Thretened structures':'thretenedStructures',
            'Airtankers':'airtankers',
-           'Bulldozers':'dozers',
+           'Bulldozers':'buldozers',
            'Fire engines':'fireEngines',
            'Fire personnel':'firePersonnel',
            'Firemen':'fireCrews',
@@ -251,12 +243,8 @@ def map():
     
     # Import bokeh areas
     
-<<<<<<< HEAD
-    counties = pd.read_pickle('geocounty.pkl')
-=======
     with open('counties', 'rb') as in_strm:
         counties = dill.load(in_strm)
->>>>>>> 52b35f81f922ba63db6901b0243847c200419e99
     
     # Generate current values
     
@@ -311,10 +299,5 @@ def map():
 
     
 if __name__ == '__main__':
-<<<<<<< HEAD
-
-	app.run(port=5000, debug=True)
-=======
     
     app.run(port=5000, debug=True)
->>>>>>> 52b35f81f922ba63db6901b0243847c200419e99
