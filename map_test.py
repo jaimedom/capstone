@@ -19,10 +19,9 @@ from sklearn.pipeline import FeatureUnion
 from sklearn import base
 import numpy as np
 from pandas.tseries.holiday import USFederalHolidayCalendar
+import dill
 
 app = Flask(__name__)
-
-# Create sklearn classes
 
 # Import the fire related data
 
@@ -244,7 +243,8 @@ def map():
     
     # Import bokeh areas
     
-    counties = pd.read_pickle('geocounty.pkl')
+    with open('counties', 'rb') as in_strm:
+        counties = dill.load(in_strm)
     
     # Generate current values
     
@@ -258,16 +258,20 @@ def map():
     
     # Generate plot
     
-    county_xs = [county["lons"] for county in counties.values()]
-    county_ys = [county["lats"] for county in counties.values()]
+    county_xs = [c["lons"] for c in counties.values()]
+    county_ys = [c["lats"] for c in counties.values()]
+    county_cs = [c["name"] for c in counties.values()]
+    
+    indexes = [county.index(c) for c in county_cs]
+    risk = [predicted[i] for i in indexes]
     
     color_mapper = CategoricalColorMapper(palette=["red", "green"], factors=[True, False])
     
     source = ColumnDataSource(data=dict(
         x=county_xs,
         y=county_ys,
-        name=county,
-        risk=predicted,
+        name=county_cs,
+        risk=risk,
     ))
     
     TOOLS = "pan,wheel_zoom,reset,hover,save"
@@ -295,5 +299,5 @@ def map():
 
     
 if __name__ == '__main__':
-
-	app.run(port=5000, debug=True)
+    
+    app.run(port=5000, debug=True)
