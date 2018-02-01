@@ -167,14 +167,14 @@ def historic():
     
     # Define terms dictionary
     
-    term ={'County':'county',
+    term ={
            'Cost':'cost',
            'Acres':'burnt_acres',
            'Injuries':'injuries',
            'Destroyed structures':'destroyedStructures',
-           'Thretened structures':'thretenedStructures',
+           'Thretened structures':'threatenedStructures',
            'Airtankers':'airtankers',
-           'Bulldozers':'buldozers',
+           'Bulldozers':'dozers',
            'Fire engines':'fireEngines',
            'Fire personnel':'firePersonnel',
            'Firemen':'fireCrews',
