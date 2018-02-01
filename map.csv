@@ -17,7 +17,7 @@ avgHumidity,county,dewPoint,maxHumidity,maxTemp,maxWind,meanTemp,minHumidity,min
 80,Kings,42,100,66,10,52,48,37,2/1/2018
 62,Lake,37,92,68,7,51,32,34,2/1/2018
 37,Lassen,14,75,60,14,44,8,28,2/1/2018
-50,Los Angeles,40,80,78,15,67,20,55,2/1/2018
+50,Los Angeles,40,10,200,15,200,40,200,8/1/2018
 71,Madera,45,96,67,4,55,45,43,2/1/2018
 84,Marin,43,100,69,8,51,46,33,2/1/2018
 76,Mariposa,41,100,66,9,51,52,35,2/1/2018
