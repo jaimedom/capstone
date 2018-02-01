@@ -27,9 +27,15 @@
     <link
     href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.css"
     rel="stylesheet" type="text/css">
+    <link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.5.min.css"
+    rel="stylesheet" type="text/css">
 
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.5.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-api-0.12.5.min.js"></script>
+      
     {{script|safe}}
     
     <!-- Bootstrap core JavaScript -->
@@ -87,6 +93,7 @@
     <div class="container2">
       <p class="explanation">The model consists of a decision tree adjusted with 32 leafs and a threshold value of 10%. The model is ensured to predict most of the potential fires while not alarming if the risk is not significant. The model achieves the following results:</p>
       <center>
+      {{script|safe}}
       {{ div|safe }}
       </center>
     </div>
