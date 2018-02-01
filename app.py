@@ -270,7 +270,7 @@ def map():
     source = ColumnDataSource(data=dict(
         x=county_xs,
         y=county_ys,
-        name=county,
+        name=county_cs,
         risk=risk,
     ))
     
