@@ -6,7 +6,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=17)
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
 def scheduled_job():
     airports = pd.read_csv('airports.csv').set_index('county').T.to_dict('list')
 
