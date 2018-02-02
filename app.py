@@ -214,13 +214,26 @@ def historic():
     x = list(df[df['county']==selected_county][term[selected_x]]) 
     y = list(df[df['county']==selected_county][term[selected_y]])
     
+    # Get rid of missing values
+    
+    x_ind = [a == a for a in x]
+    y_ind = [b == b for b in y]
+    index_clean = []
+    
+    for k in range(len(x_ind)):
+        
+        index_clean.append(x_ind[k]*y_ind[k])
+        
+    x = [i for indx,i in enumerate(x) if index_clean[indx]]
+    y = [j for indy,j in enumerate(y) if index_clean[indy]]
+    
     source = ColumnDataSource(data=dict(x=x, y=y))
     
     plot = figure(plot_height=400, plot_width=400, 
                   title=selected_x+' vs '+selected_y+' in '+selected_county+' County',
                   tools="pan,reset,save,wheel_zoom")
     
-    plot.circle('x', 'y', source=source)
+    plot.circle('x', 'y', size=8, source=source)
     
     # Create the widgets    
     
