@@ -2,9 +2,9 @@ import pandas as pd
 import datetime
 import pytz
 import re
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.blocking import BackgroundScheduler
 
-sched = BlockingScheduler()
+sched = BackgroundScheduler()
 
 @sched.scheduled_job('cron', day_of_week='mon-sun', hour=1)
 def scheduled_job():
