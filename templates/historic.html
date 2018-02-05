@@ -22,14 +22,14 @@
     <!-- Custom styles for this template -->
     
     <link
-    href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.css"
+    href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.css"
     rel="stylesheet" type="text/css">
     <link
-    href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.css"
+    href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.css"
     rel="stylesheet" type="text/css">
 
-    <script src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
-    <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
     {{script|safe}}
     
     <!-- Bootstrap core JavaScript -->
@@ -39,7 +39,7 @@
     <style>
       .container2{
         padding-top: 20px;
-        padding-bottom: 50px;
+        padding-bottom: 130px;
         padding-right:15px;
         padding-left:15px;
         margin-right:auto;
@@ -66,7 +66,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Smokey analytics</a>
+        <a class="navbar-brand" href="/">Smokey analytics</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -85,9 +85,10 @@
 
     <!-- Page Content -->
     <div class="container2">
-      <p class="explanation">The model consists of a decision tree adjusted with 32 leafs and a threshold value of 10%. The model is ensured to predict most of the potential fires while not alarming if the risk is not significant. The model achieves the following results:</p>
       <center>
+      <p class="explanation">This interactive graph grants you access to the data that was used to model the machine learning algorithm. This information can be used to develop better plans to prevent fires. The missing values have been deleted for this visualization and therefore, some graphs might be empty.</p>
       <form action="/historic">
+        County: 
         <select name="selected_county">
 	        {% for county in county_names %}
 		        {% if county == selected_county %}
@@ -97,6 +98,7 @@
 		        {% endif %}
 	        {% endfor %}
         </select>
+        X axis:
         <select name="selected_x">
 	        {% for xc in axis_options %}
 		        {% if xc == selected_x %}
@@ -106,6 +108,7 @@
 		        {% endif %}
 	        {% endfor %}
         </select>
+        Y axis:
         <select name="selected_y">
 	        {% for yc in axis_options %}
 		        {% if yc == selected_y %}

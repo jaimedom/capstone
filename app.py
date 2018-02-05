@@ -235,6 +235,9 @@ def historic():
     
     plot.circle('x', 'y', size=8, source=source)
     
+    plot.xaxis.axis_label = selected_x
+    plot.yaxis.axis_label = selected_y
+    
     # Create the widgets    
     
     script, div = components(plot)
