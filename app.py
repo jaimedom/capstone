@@ -321,18 +321,22 @@ def local():
 @app.route('/forecast')    
 def forecast():
     
-    df_pred = pd.DataFrame.from_dict({
-            'avgHumidity' : [float(request.args.get('avgHumidity'))],
-            'county' : [request.args.get('county_local')],
-            'dewPoint' : [float(request.args.get('dewPoint'))],
-            'maxHumidity' : [float(request.args.get('maxHumidity'))],
-            'maxTemp' : [float(request.args.get('maxTemp'))],
-            'maxWind' : [float(request.args.get('maxWind'))],
-            'meanTemp' : [float(request.args.get('meanTemp'))],
-            'minHumidity' : [float(request.args.get('minHumidity'))],
-            'minTemp' : [float(request.args.get('minTemp'))],
-            'startDate' : [request.args.get('startDate')]
-            })
+    try:
+        df_pred = pd.DataFrame.from_dict({
+                'avgHumidity' : [float(request.args.get('avgHumidity'))],
+                'county' : [request.args.get('county_local')],
+                'dewPoint' : [float(request.args.get('dewPoint'))],
+                'maxHumidity' : [float(request.args.get('maxHumidity'))],
+                'maxTemp' : [float(request.args.get('maxTemp'))],
+                'maxWind' : [float(request.args.get('maxWind'))],
+                'meanTemp' : [float(request.args.get('meanTemp'))],
+                'minHumidity' : [float(request.args.get('minHumidity'))],
+                'minTemp' : [float(request.args.get('minTemp'))],
+                'startDate' : [request.args.get('startDate')]
+                })
+    except:
+        
+        return redirect('/wrong')
 
     if df_pred.shape[1] != 10 or df_pred.avgHumidity[0]<0 or df_pred.avgHumidity[0]>100 or df_pred.maxHumidity[0]<0 or df_pred.maxHumidity[0]>100 or df_pred.minHumidity[0]<0 or df_pred.minHumidity[0]>100:
         
