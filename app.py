@@ -357,6 +357,11 @@ def safe():
 def risk(): 
     
     return render_template("risk.html")
+
+@app.route('/wrong')    
+def wrong(): 
+    
+    return render_template("wrong.html")
     
 if __name__ == '__main__':
     
