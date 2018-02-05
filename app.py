@@ -311,7 +311,7 @@ def map():
 def local():
      
     airports = pd.read_csv('airports.csv').set_index('county').T.to_dict('list')    
-    counties = list(airports.keys())
+    counties = sorted(list(airports.keys()))
     
     return render_template("local.html", counties=counties)
 
