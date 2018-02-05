@@ -307,7 +307,50 @@ def map():
    
     return render_template("map.html", script=script, div=div)
     
+@app.route('/local')
+def local():
+     
+    airports = pd.read_csv('airports.csv').set_index('county').T.to_dict('list')    
+    counties = list(airports.keys())
+    
+    return render_template("local.html", counties=counties)
 
+@app.route('/forecast')    
+def forecast():
+    
+    df_pred = pd.DataFrame.from_dict({
+            'avgHumidity' : [float(request.args.get('avgHumidity'))],
+            'county' : [request.args.get('county_local')],
+            'dewPoint' : [float(request.args.get('dewPoint'))],
+            'maxHumidity' : [float(request.args.get('maxHumidity'))],
+            'maxTemp' : [float(request.args.get('maxTemp'))],
+            'maxWind' : [float(request.args.get('maxWind'))],
+            'meanTemp' : [float(request.args.get('meanTemp'))],
+            'minHumidity' : [float(request.args.get('minHumidity'))],
+            'minTemp' : [float(request.args.get('minTemp'))],
+            'startDate' : [request.args.get('startDate')]
+            })
+
+    df_pred.startDate = pd.to_datetime(df_pred.startDate)
+    predicted_local = model.predict(df_pred)
+    
+    if predicted_local[0]:
+        
+        return redirect('/risk')
+        
+    else:
+        
+        return redirect('/safe')
+    
+@app.route('/safe')    
+def safe():
+    
+    return render_template("safe.html")
+
+@app.route('/risk')    
+def risk(): 
+    
+    return render_template("risk.html")
     
 if __name__ == '__main__':
     
