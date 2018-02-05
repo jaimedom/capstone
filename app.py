@@ -331,16 +331,22 @@ def forecast():
             'startDate' : [request.args.get('startDate')]
             })
 
-    df_pred.startDate = pd.to_datetime(df_pred.startDate)
-    predicted_local = model.predict(df_pred)
+    if df_pred.shape[1] != 10 or df_pred.avgHumidity[0]<0 or df_pred.avgHumidity[0]>100 or df_pred.maxHumidity[0]<0 or df_pred.maxHumidity[0]>100 or df_pred.minHumidity[0]<0 or df_pred.minHumidity[0]>100:
+        
+        return redirect('/wrong')
     
-    if predicted_local[0]:
-        
-        return redirect('/risk')
-        
     else:
         
-        return redirect('/safe')
+        df_pred.startDate = pd.to_datetime(df_pred.startDate)
+        predicted_local = model.predict(df_pred)
+
+        if predicted_local[0]:
+
+            return redirect('/risk')
+
+        else:
+
+            return redirect('/safe')
     
 @app.route('/safe')    
 def safe():
