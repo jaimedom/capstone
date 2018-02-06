@@ -369,6 +369,64 @@ def risk():
 def wrong(): 
     
     return render_template("wrong.html")
+
+@app.route('/map_test')
+def map_test():
+    
+    # Import bokeh areas
+    
+    with open('counties', 'rb') as in_strm:
+        counties = dill.load(in_strm)
+    
+    # Generate current values
+    
+    df = pd.read_csv('map_test.csv')
+    df.startDate = pd.to_datetime(df.startDate)
+        
+    # Inputs for the plot
+    
+    county = list(df['county'])
+    predicted = model.predict(df)
+    
+    # Generate plot
+    
+    county_xs = [c["lons"] for c in counties.values()]
+    county_ys = [c["lats"] for c in counties.values()]
+    county_cs = [c["name"] for c in counties.values()]
+    
+    indexes = [county.index(c) for c in county_cs]
+    risk = [predicted[i] for i in indexes]
+    
+    color_mapper = CategoricalColorMapper(palette=["red", "green"], factors=[True, False])
+    
+    source = ColumnDataSource(data=dict(
+        x=county_xs,
+        y=county_ys,
+        name=county_cs,
+        risk=risk,
+    ))
+    
+    TOOLS = "pan,wheel_zoom,reset,hover,save"
+    
+    p = figure(
+        title="Current risk of fire in California", tools=TOOLS,
+        x_axis_location=None, y_axis_location=None
+    )
+    p.grid.grid_line_color = None
+    
+    p.patches('x', 'y', source=source,
+              fill_color={'field': 'risk', 'transform': color_mapper},
+              fill_alpha=0.7, line_color="white", line_width=0.5)
+    
+    hover = p.select_one(HoverTool)
+    hover.point_policy = "follow_mouse"
+    hover.tooltips = [
+        ("County", "@name")
+    ]
+
+    script, div = components(p)
+   
+    return render_template("map.html", script=script, div=div)
     
 if __name__ == '__main__':
     
