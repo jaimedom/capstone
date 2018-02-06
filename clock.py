@@ -41,7 +41,10 @@ for i in airports.keys():
     temp['avgHumidity']= [int(re.findall(r'[0-9]+',table['b']['Average Humidity'])[0])]
     temp['maxHumidity']= [int(re.findall(r'[0-9]+',table['b']['Maximum Humidity'])[0])]
     temp['minHumidity']= [int(re.findall(r'[0-9]+',table['b']['Minimum Humidity'])[0])]
-    temp['maxWind']= [int(re.findall(r'[0-9]+',table['b']['Max Wind Speed'])[0])]
+    try:
+        temp['maxWind']= [int(re.findall(r'[0-9]+',table['b']['Max Wind Speed'])[0])]
+    except:
+        temp['maxWind']= 0
 
     if df.empty:
         df = pd.DataFrame.from_dict(temp)
