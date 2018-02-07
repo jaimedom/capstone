@@ -3,7 +3,7 @@ import datetime
 import pytz
 import re
 
-airports = pd.read_csv('airports.csv').set_index('county').T.to_dict('list')
+airports = pd.read_csv('/home/vagrant/datacourse/capstone/airports.csv').set_index('county').T.to_dict('list')
 
 # Get date
 
@@ -53,5 +53,5 @@ for i in airports.keys():
 
 df.sort_values(by='county', inplace=True)
 df.reset_index(inplace=True,drop=True)
-df.to_csv('map.csv', index=False)
+df.to_csv('/home/vagrant/datacourse/capstone/map.csv', index=False)
 
