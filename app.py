@@ -319,7 +319,7 @@ def local():
     return render_template("local.html", counties=counties)
 
 @app.route('/local_test')
-def local():
+def local_test():
      
     airports = pd.read_csv('airports.csv').set_index('county').T.to_dict('list')    
     counties = sorted(list(airports.keys()))
