@@ -318,6 +318,14 @@ def local():
     
     return render_template("local.html", counties=counties)
 
+@app.route('/local_test')
+def local():
+     
+    airports = pd.read_csv('airports.csv').set_index('county').T.to_dict('list')    
+    counties = sorted(list(airports.keys()))
+    
+    return render_template("local_test.html", counties=counties)
+
 @app.route('/forecast')    
 def forecast():
     
